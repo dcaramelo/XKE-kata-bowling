@@ -42,7 +42,7 @@ public class Round {
 			} else {
 				bonus += getValueFromAChar(afterNextThrow);
 			}
-			return SPARE_NUMBERPOINTS + bonus;
+			return STRIKE_NUMBERPOINTS + bonus;
 
 		default:
 			return value;
