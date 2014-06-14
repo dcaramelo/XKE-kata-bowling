@@ -25,12 +25,14 @@ En entrée, vous aurez une chaine de 12 à 22 à caractères, les caractères pe
 
 En sortie, vous devez fournir un nombre entier qui sera le total.
 
-Voici quelques exemples :
+Vous devez créer une classe qui implémente l'interface ComputeBowlingScore.java afin de fonctionner correctement avec notre SI et faire passer l'ensemble des tests.
+
+Voici quelques exemples des resultats de jeu :
    * "XXXXXXXXXXXX" (12 lancer : 12 strikes) = (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) = 300
    * "9-9-9-9-9-9-9-9-9-9-" (20 lancer : 10 lancer réussi et 10 coups foireux) = 9 + 9 + 9 + 9 + 9 + 9 + 9 + 9 + 9 + 9 = 90
    * "5/5/5/5/5/5/5/5/5/5/5" (21 lancer: 10 lancer réussi et 10 spare, et le bonus final) = (10+5) + (10+5) + (10+5) + (10+5) + (10+5) + (10+5) + (10+5) + (10+5) + (10+5) + (10+5) = 150
 
-Afin de ne pas vous aventurer dans trop de complexité dès le départ nous vous proposons de commencer par écrit les tests dans l’ordre suivant :
+Afin de ne pas vous aventurer dans trop de complexité dès le départ nous vous proposons de suivre l’ordre des cas de test suivant :
 
    * --------------------
    * 11111121111111111111
