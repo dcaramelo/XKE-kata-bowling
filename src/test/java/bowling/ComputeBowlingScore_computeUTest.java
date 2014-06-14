@@ -30,7 +30,7 @@ public class ComputeBowlingScore_computeUTest {
 
 	@Before
 	public void setup() {
-		computeBowlingScore = new ComputeBowlingScoreImpl();
+		// TODO : Create the computeBowlingScore object !
 	}
 	
 	@Parameters(name = "{0}")
