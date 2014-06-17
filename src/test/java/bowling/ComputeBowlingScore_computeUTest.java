@@ -1,18 +1,16 @@
 package bowling;
 
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-@SuppressWarnings({"unused", "rawtypes"})
+import java.util.Arrays;
+import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
+
 @RunWith(Parameterized.class)
 public class ComputeBowlingScore_computeUTest {
 
@@ -29,33 +27,31 @@ public class ComputeBowlingScore_computeUTest {
 	}
 
 	@Before
-	public void setup() {
+	public void createBowlingScoreImplementation() {
 		// TODO : Create the computeBowlingScore object !
 	}
 	
 	@Parameters(name = "{0}")
-    public static Collection parameters() {
-        return Arrays.asList(new Object[][] {
-                { "With everything missed Should return zero", "--------------------", Integer.valueOf(0)},
-                { "With one pin down each time should return 20", "11111111111111111111", Integer.valueOf(20)},
-                { "With one spare all pins on second shoot should return 10", "-------/------------", Integer.valueOf(10)},
-                { "With one spare in two times should return 10", "------4/------------", Integer.valueOf(10)},
-                { "With two spare should return 20", "------4/-----/------", Integer.valueOf(20)},
-                { "With one strike should return 10", "--------X----------", Integer.valueOf(10)},
-                { "With two strike in row should return 30", "------XX----------", Integer.valueOf(30)},
-                { "With one spare followed by strike should return 30", "--------4/X--------", Integer.valueOf(30)},
-                { "With Spare Bonus should return 150", "5/5/5/5/5/5/5/5/5/5/5", Integer.valueOf(150)},
-                { "With perfect game should return 300", "XXXXXXXXXXXX", Integer.valueOf(300)}
-        });
+	public static Collection parameters() {
+		return Arrays.asList(new Object[][]{
+				{"With everything missed Should return zero", "--------------------", 0},
+				{"With one pin down each time should return 20", "11111111111111111111", 20},
+				{"With one spare all pins on second shoot should return 10", "-------/------------", 10},
+				{"With one spare in two times should return 10", "------4/------------", 10},
+				{"With two spare should return 20", "------4/-----/------", 20},
+				{"With one strike should return 10", "--------X----------", 10},
+				{"With two strike in row should return 30", "------XX----------", 30},
+				{"With one spare followed by strike should return 30", "--------4/X--------", 30},
+				{"With Spare Bonus should return 150", "5/5/5/5/5/5/5/5/5/5/5", 150},
+				{"With perfect game should return 300", "XXXXXXXXXXXX", 300}
+		});
 	}
 
 	@Test
 	public void computeScore() {
-		// Test
 		int computedScore = computeBowlingScore.compute(inputResult);
 
-		// assert
-		Assert.assertEquals(expectedScore, computedScore);
+		assertEquals(testDescription, expectedScore, computedScore);
 	}
-	
+
 }
