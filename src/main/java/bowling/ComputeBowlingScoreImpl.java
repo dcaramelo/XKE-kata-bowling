@@ -9,65 +9,56 @@ public class ComputeBowlingScoreImpl implements ComputeBowlingScore {
 	public int compute(String allScores) {
 
 		int score = 0;
-		List<Round> rounds = parseScoreInRoundsList(allScores);
-
-		for (int roundNumber = 0; roundNumber < 10; roundNumber++) {
-
-			Round currentRound = rounds.get(roundNumber);
-			score = score + currentRound.computeRoundScore();
+		
+		List<Shoot> convert = new FrameConvector(allScores).convert();
+		List<Shoot> dataEnrichment = dataEnrichment(convert);
+		List<Round> reduce = reduce(dataEnrichment);
+		
+		for(Round round : reduce) {
+			score += round.computeScore();
 		}
+
 		return score;
 	}
-
-	public List<Round> parseScoreInRoundsList(String allScores) {
-		List<Round> rounds = new ArrayList<Round>();
-
-		List<Character> scoreList = createIteratorOnScoresChars(allScores);
-		Iterator<Character> it = scoreList.iterator();
-
-		int throwNumber = 0;
-		while (it.hasNext() && throwNumber < 10) {
-
-			Character currentThrow = it.next();
-			int position = currentThrow == 'X' ? throwNumber : throwNumber * 2;
-			Character nextThrow = position + 1 < scoreList.size() ? scoreList.get(position + 1) : '-';
-			Character afterNextThrow = position + 2 < scoreList.size() ? scoreList.get(position + 2) : '-';
-			Round round = new Round(nextThrow, afterNextThrow); 
-			throwNumber++;
-
-			switch (currentThrow) {
-			case 'X':
-				round.beAStrike();
-				break;
-
-			default:
-				Character next = it.next();
-				switch (next) {
-				case '/':
-					round.beASpare();
-					break;
-				case '-': 
-				default:
-					round.beNormal(currentThrow, next);
-					break;
-				}
-
-				break;
-			}
-			rounds.add(round);
-
-		}
-		return rounds;
-	}
-
-	private List<Character> createIteratorOnScoresChars(String allScores) {
-		List<Character> scoreList = new ArrayList<Character>();
-		char[] scoresArray = allScores.toCharArray();
+	
+	private List<Shoot> dataEnrichment(List<Shoot> shoots) {
 		
-		for (char scoreInChar : scoresArray) {
-			scoreList.add(new Character(scoreInChar));
+		List<Shoot> result = new ArrayList<Shoot>();
+		
+		for (int i=0;i < shoots.size(); i++) {
+			Shoot shoot = shoots.get(i);
+			if (shoot.getType() == Type.STRIKE) {
+				shoot.addBonus(i+1 < shoots.size() ? shoots.get(i+1).getScore() : 0);
+				shoot.addBonus(i+2 < shoots.size() ? shoots.get(i+2).getScore() : 0);
+			} else if (shoot.getType() == Type.SPARE) {
+				shoot.addBonus(i+1 < shoots.size() ? shoots.get(i+1).getScore() : 0);
+			}
+			result.add(shoot);
 		}
-
-		return scoreList;
+		
+		return result;
+	}
+	
+	private List<Round> reduce(List<Shoot> shoots) {
+		
+		List<Round> result = new ArrayList<Round>();
+		Iterator<Shoot> iterator = shoots.iterator();
+		
+		while (iterator.hasNext() && result.size() < 10) {
+			Shoot shoot = iterator.next();
+			
+			Round round = new Round();
+			if (shoot.getType() == Type.STRIKE) {
+				round.add(shoot);
+			} else {
+				round.add(shoot);
+				if (iterator.hasNext()) {
+					round.add(iterator.next());
+				}
+			}
+			result.add(round);
+		}
+		
+		return result;
 	}
 }

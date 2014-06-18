@@ -42,6 +42,7 @@ public class ComputeBowlingScore_computeUTest {
                 { "With one spare in two times should return 10", "------4/------------", Integer.valueOf(10)},
                 { "With two spare should return 20", "------4/-----/------", Integer.valueOf(20)},
                 { "With one strike should return 10", "--------X----------", Integer.valueOf(10)},
+                { "With one strike followed normale round should return 10", "--------X12--------", Integer.valueOf(16)},
                 { "With two strike in row should return 30", "------XX----------", Integer.valueOf(30)},
                 { "With one spare followed by strike should return 30", "--------4/X--------", Integer.valueOf(30)},
                 { "With Spare Bonus should return 150", "5/5/5/5/5/5/5/5/5/5/5", Integer.valueOf(150)},

@@ -1,62 +1,29 @@
 package bowling;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Round {
-
-	private RoundType roundType;
-	private int value;
-	private Character nextThrow;
-	private Character afterNextThrow;
-
-	protected static final int STRIKE_NUMBERPOINTS = 10;
-	protected final static int SPARE_NUMBERPOINTS = 10;
-
-	public Round(Character nextThrow, Character afterNextThrow) {
-		this.nextThrow = nextThrow;
-		this.afterNextThrow = afterNextThrow;
+	
+	private List<Shoot> shoots = new ArrayList<Shoot>(22);
+	
+	public void add(Shoot lance) {
+		shoots.add(lance);
 	}
-
-	public void beAStrike() {
-		this.roundType = RoundType.STRIKE;
-	}
-
-	public void beASpare() {
-		this.roundType = RoundType.SPARE;
-	}
-
-	public void beNormal(Character firstThrow, Character secondThrow) {
-		this.roundType = RoundType.NORMAL;
-		this.value = getValueFromAChar(firstThrow) + getValueFromAChar(secondThrow) ;
-	}
-
-	public int computeRoundScore() {
-		int bonus = 0;
-		switch (roundType) {
-		case SPARE:
-			bonus = getValueFromAChar(afterNextThrow);
-			return SPARE_NUMBERPOINTS + bonus;
-
-		case STRIKE:
-			bonus = getValueFromAChar(nextThrow);
-			if (afterNextThrow == '/') {
-				bonus = 10;
+	
+	public int computeScore() {
+		
+		Shoot firstShoot = shoots.get(0);
+		
+		if (shoots.size() > 1) {
+			Shoot secondShoot = shoots.get(1);
+			if (secondShoot.getType() == Type.SPARE) {
+				return secondShoot.getFinalScore();
 			} else {
-				bonus += getValueFromAChar(afterNextThrow);
+				return firstShoot.getFinalScore() + secondShoot.getFinalScore();
 			}
-			return STRIKE_NUMBERPOINTS + bonus;
-
-		default:
-			return value;
 		}
+		
+		return firstShoot.getFinalScore();
 	}
-
-	private int getValueFromAChar(Character throwCharacter) {
-		int bonus = 0;
-		if (Character.isDigit(throwCharacter)) {
-			bonus = Character.getNumericValue(throwCharacter);
-		} else if (throwCharacter == 'X') {
-			bonus = STRIKE_NUMBERPOINTS;
-		}
-		return bonus;
-	}
-
 }
