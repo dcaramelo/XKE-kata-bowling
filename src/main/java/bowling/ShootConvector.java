@@ -4,11 +4,11 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FrameConvector {
+public class ShootConvector {
 
 	private String inputFrameString;
 	
-	public FrameConvector(String inputFrameString) {
+	public ShootConvector(String inputFrameString) {
 		this.inputFrameString = inputFrameString;
 	}
 	
