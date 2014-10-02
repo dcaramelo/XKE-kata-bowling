@@ -25,8 +25,6 @@ En entrée, vous aurez une chaine de 12 à 22 caractères. Les caractères peuve
 
 En sortie, vous devez fournir un nombre entier qui sera le score total.
 
-Vous devez créer une classe qui implémente l'interface `bowling.ComputeBowlingScore` afin de fonctionner correctement avec notre SI et faire passer l'ensemble des tests.
-
 Voici quelques exemples des resultats de jeu :
    * `XXXXXXXXXXXX` (12 lancers : 12 strikes) = (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) + (10+10+10) = 300
    * `9-9-9-9-9-9-9-9-9-9-` (20 lancers : 10 lancers réussis et 10 coups foireux) = 9 + 9 + 9 + 9 + 9 + 9 + 9 + 9 + 9 + 9 = 90
