@@ -1,7 +1,7 @@
 Bowling Impossible
 ==================
 
-Le championnat du monde of the world 2014 de bowling commence dans 2 heures (à voir pour la durée) mais un bug de la matrice empêche le calcul des scores, votre mission si vous l’acceptez est de ré-implementer le moteur de calcul de score temporel avec les règles suivantes :
+Le championnat du monde of the world 2014 de bowling commence dans 3 heures mais un bug de la matrice empêche le calcul des scores, votre mission si vous l’acceptez est de ré-implementer le moteur de calcul de score temporel avec les règles suivantes :
 
 Règles du bowling : 
 -------------------
